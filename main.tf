@@ -3,8 +3,15 @@
 # This is my 2nd change!
 
 
-
 terraform {
+  cloud {
+    organization = "NetworkCoder-Daniel"
+
+    workspaces {
+      name = "terra-house-10"
+    }
+  }
+
   required_providers {
     random = {
       source = "hashicorp/random"
