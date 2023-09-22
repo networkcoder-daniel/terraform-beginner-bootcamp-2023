@@ -293,3 +293,17 @@ Provide the following code (replace your token in the file):
 ### Automate Generation of TFRC Credentials
 
 We have automated this workaround with the following bash script [bin/generate_tfrc_credentials](bin/generate_tfrc_credentials)
+
+### Create an alias for terraform
+
+Add alias into .bash_profile file. 
+
+```sh
+alias tf="terraform"
+```
+
+To reload our .bash_profile we use the command `source ~/.bash_profile`. After reloading the file we are now able to use the alias that we put in the file.
+
+To have this persist across reboots we need to create a bash script for this because Gitpod will not automatically do this for us.
+
+Used ChatGPT to create a bash script to have the alias persist across reboots - [bin/set_tf_alias](bin/set_tf_alias)
