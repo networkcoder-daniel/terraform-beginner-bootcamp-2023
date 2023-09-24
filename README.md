@@ -1,5 +1,17 @@
 # Terraform Beginner Bootcamp 2023
 
+## Table of Contents
+
+- [Semantic Versioning](#semantic-versioning-mage)
+- [Install the Terraform CLI](#install-the-terraform-cli)
+  - [Considerations with the Terraform CLI changes](#considerations-with-the-terraform-cli-changes)
+  - [Considerations for Linux Distrobutions](#considerations-for-linux-distrobutions)
+- []()
+- []()
+- []()
+- []()
+- []()
+
 ## Semantic Versioning :mage:
 
 This project will use semantic versioning for its tagging.
@@ -307,3 +319,5 @@ To reload our .bash_profile we use the command `source ~/.bash_profile`. After r
 To have this persist across reboots we need to create a bash script for this because Gitpod will not automatically do this for us.
 
 Used ChatGPT to create a bash script to have the alias persist across reboots - [bin/set_tf_alias](bin/set_tf_alias)
+
+[Terraform Standard Module Structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
