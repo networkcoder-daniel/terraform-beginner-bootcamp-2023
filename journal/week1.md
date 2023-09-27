@@ -74,3 +74,84 @@ If someone were to delete/modify cloud resources manually through ClickOps.
 
 If we run Terraform plan `tf plan` again it will attempt to put our infrastructure back into the expected state fixing **Confgiratin Drift**. 
 
+## Fix using Terraform Refresh
+
+```sh
+terraform apply -refresh-only -auto-approve
+```
+
+## Terraform Modules
+
+### Terraform Module Structure
+
+It is recommend to place modules in a `modules` directory when locally developing modules but you can name it whatever you like.
+
+### Passing Input Variables
+
+We can pass input variables to our module. The module has to declare the terraform variables in its own variables.tf
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid = var.user_uuid
+  bucket_name = var.bucket_name
+}
+```
+
+### Modules Sources
+
+Using the source we can import the module from various places, eg:
+
+- Locally
+- Github
+- Terraform Registry
+
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+}
+
+[Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
+
+## Considerations when using ChatGPT to write Terraform 
+
+LLMs such as ChatGPT may not be trained on the latest documentation or information about Terraform.
+
+It may likely produce older examples that could be deprecated which could affect providers.
+
+### S3 Static Website Hositng Documentation
+
+[S3 Static Website Hosting](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration)
+
+## Working with Files in Terraform
+
+### Fileexists function
+
+This is a built-in terraform function to check the existance of a file.
+
+```tf
+condition = fileexists(var.error_html_filepath)
+```
+
+[fileexists Function Documentation](https://developer.hashicorp.com/terraform/language/functions/fileexists)
+
+### Filemd5
+
+[filemd5 Function Documentation](https://developer.hashicorp.com/terraform/language/functions/filemd5)
+
+### Path Variable
+
+In terraform there is a special variable called `path` that allows us to reference local paths:
+
+- path.module = get the path for the current module
+- path.root = get the path for the root module 
+
+[Special Path Variable](https://developer.hashicorp.com/terraform/language/functions/fileexists)
+
+```
+resource "aws_s3_object" "index_html" {
+  bucket = aws_s3_bucket.website_bucket.bucket 
+  key = "index.html" 
+  source = "${path.root}/public/index.html" }
+```
+
+
