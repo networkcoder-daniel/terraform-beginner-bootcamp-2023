@@ -15,12 +15,14 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )
+
 // func main(): Defines the main function, the entry point of the app. 
 // When you run the program, it starts executing from this function.
 func main() {
 	plugin.Serve(&plugin.ServeOpts{
 		ProviderFunc: Provider,
 	})
+
 	// Format.PrintLine
 	// Prints to standard output
 	fmt.Println("Hello, world!")
@@ -31,6 +33,7 @@ type Config struct {
 	Token string
 	UserUuid string
 }
+
 
 // in golang, a titlecase function will get exported.
 func Provider() *schema.Provider {
@@ -46,11 +49,12 @@ func Provider() *schema.Provider {
 			"endpoint": {
 				Type: schema.TypeString,
 				Required: true,
-				Description: "The endpoint for hte external service",
+
+				Description: "The endpoint for the external service",
 			},
 			"token": {
 				Type: schema.TypeString,
-				Sensitive: true, // make the token as sensitive to hide it the logs
+				Sensitive: true, // mark the token as sensitive to hide it in the logs
 				Required: true,
 				Description: "Bearer token for authorization",
 			},
@@ -326,3 +330,4 @@ func resourceHouseDelete(ctx context.Context, d *schema.ResourceData, m interfac
 	log.Print("resourceHouseDelete:end")
 	return diags
 }
+
