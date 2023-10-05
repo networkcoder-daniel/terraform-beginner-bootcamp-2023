@@ -30,3 +30,15 @@ provider "terratowns" {
 #   content_version = var.content_version
 #   assets_path = var.assets_path
 # }
+
+resource "terratowns_home" "home" {
+  name = "Cartoons to Movies!!"
+  description = <<DESCRIPTION
+Great cartoons from back in the 90's that were
+fun to watch and later became good movies.
+DESCRIPTION
+  #domain_name = module.terrahouse_aws.cloudfront_url
+  domain_name = "3fdq3gz.cloudfront.net"
+  town = "gamers-grotto"
+  content_version = 1
+}
