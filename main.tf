@@ -5,13 +5,13 @@ terraform {
       version = "1.0.0"
     }
   }
-#   cloud {
-#     organization = "NetworkCoder-Daniel"
+  cloud {
+    organization = "NetworkCoder-Daniel"
 
-#     workspaces {
-#       name = "terra-house-10"
-#     }
-#   }
+    workspaces {
+      name = "terra-house-10"
+    }
+  }
 }
 
 provider "terratowns" {
@@ -21,22 +21,38 @@ provider "terratowns" {
 }
 
 
-module "terrahouse_aws" {
-  source = "./modules/terrahouse_aws"
+module "home_cartoons_hosting" {
+  source = "./modules/terrahome_aws"
   user_uuid = var.teacherseat_user_uuid
-  index_html_filepath = var.index_html_filepath
-  error_html_filepath = var.error_html_filepath
-  content_version = var.content_version
-  assets_path = var.assets_path
+  public_path = var.cartoons.public_path
+  content_version = var.cartoons.content_version
 }
 
-resource "terratowns_home" "home" {
+resource "terratowns_home" "home_cartoons" {
   name = "Cartoons to Movies!!"
   description = <<DESCRIPTION
 Great cartoons from back in the 90's that were
 fun to watch and later became good movies.
 DESCRIPTION
-  domain_name = module.terrahouse_aws.cloudfront_url
+  domain_name = module.home_cartoons_hosting.domain_name
   town = "missingo"
-  content_version = 1
+  content_version = var.cartoons.content_version
+}
+
+module "home_recipe_hosting" {
+  source = "./modules/terrahome_aws"
+  user_uuid = var.teacherseat_user_uuid
+  public_path = var.recipe.public_path
+  content_version = var.recipe.content_version
+}
+
+resource "terratowns_home" "home_recipe" {
+  name = "My fav recipe"
+  description = <<DESCRIPTION
+Really like to eat and one of my favorite recipes
+to make is chicken tikka masala.
+DESCRIPTION
+  domain_name = module.home_recipe_hosting.domain_name
+  town = "missingo"
+  content_version = var.recipe.content_version
 }
