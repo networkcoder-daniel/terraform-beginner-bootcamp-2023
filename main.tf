@@ -35,7 +35,7 @@ Great cartoons from back in the 90's that were
 fun to watch and later became good movies.
 DESCRIPTION
   domain_name = module.home_cartoons_hosting.domain_name
-  town = "missingo"
+  town = "video-valley"
   content_version = var.cartoons.content_version
 }
 
@@ -53,6 +53,6 @@ Really like to eat and one of my favorite recipes
 to make is chicken tikka masala.
 DESCRIPTION
   domain_name = module.home_recipe_hosting.domain_name
-  town = "missingo"
+  town = "cooker-cove"
   content_version = var.recipe.content_version
 }
